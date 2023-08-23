@@ -1,12 +1,23 @@
 <?php 
 
-function generaStringaCasuale($lunghezza) {
+function generaStringaCasuale($lunghezza, $num, $lett, $spec) {
     $numeri = '0123456789';
     $lettereMaiuscole = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $lettereMinuscole = 'abcdefghijklmnopqrstuvwxyz';
     $caratteriSpeciali = '!@#$%^&*()_-+=<>?';
-
-    $caratteri = $numeri . $lettereMaiuscole . $lettereMinuscole . $caratteriSpeciali;
+    $caratteri = "";
+    if($num){
+        $caratteri .= $numeri;
+    }
+    if($lett){
+        $caratteri .=  $lettereMinuscole . $lettereMaiuscole;
+    }
+    if($spec){
+        $caratteri .= $caratteriSpeciali;
+    }
+    if (!$num && !$lett && !$spec){
+        $caratteri .= $numeri . $lettereMinuscole . $lettereMaiuscole .$caratteriSpeciali;
+    }
     $lunghezzaCaratteri = strlen($caratteri);
     $stringaCasuale = '';
 
