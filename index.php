@@ -1,23 +1,6 @@
 <?php 
-function generaStringaCasuale($lunghezza) {
-    $numeri = '0123456789';
-    $lettereMaiuscole = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $lettereMinuscole = 'abcdefghijklmnopqrstuvwxyz';
-    $caratteriSpeciali = '!@#$%^&*()_-+=<>?';
-
-    $caratteri = $numeri . $lettereMaiuscole . $lettereMinuscole . $caratteriSpeciali;
-    $lunghezzaCaratteri = strlen($caratteri);
-    $stringaCasuale = '';
-
-    for ($i = 0; $i < $lunghezza; $i++) {
-        $indiceCasuale = rand(0, $lunghezzaCaratteri - 1);
-        $stringaCasuale .= $caratteri[$indiceCasuale];
-    }
-
-    return $stringaCasuale;
-}
-
-$lunghezzaDesiderata = $_GET["passLen"];
+require_once ("./function.php");
+$lunghezzaDesiderata = $_GET["passLen"] ?? 16;
 $stringaGenerata = generaStringaCasuale($lunghezzaDesiderata);
 
 ?>
@@ -43,20 +26,22 @@ $stringaGenerata = generaStringaCasuale($lunghezzaDesiderata);
                 Genera una password sicura!
             </h2>
         </div>
-        <div class = "drop-shadow-xl bg-slate-500 p-6 rounded-md mb-8">
+        <div class = "drop-shadow-xl bg-slate-400 p-6 rounded-md mb-8">
             Inserire i parametri di generazione.
         </div>
         <div class = "drop-shadow-xl bg-slate-400 rounded-md p-6">
             <form action="index.php" method="get">
                 <div class = "pb-4">
                     <label for="passLen">Inserire lunghezza password:</label>
-                    <input class = "text-center py-1 pl-8 mx-8 rounded-md text-black" min = "1" max = "32" type="number" name="passLen" id="passLen">
+                    <input class = "text-center py-1 pl-8 mx-8 rounded-md text-black" min = "1" max = "32" value = "8" type="number" name="passLen" id="passLen">
                 </div>
 
                 <button class = "drop-shadow-xl rounded-md bg-slate-700 px-4 py-2" type="submit">Invia</button>
             </form>
         </div>
-        <?php echo $stringaGenerata; ?>
+        <div class = "drop-shadow-xl text-6xl rounded-md py-4 my-4 flex justify-center items-center bg-slate-400">
+            <h1><?php echo $stringaGenerata; ?></h1>
+        </div>
     </div>
 </body>
 </html>
